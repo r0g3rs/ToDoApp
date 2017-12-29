@@ -1,0 +1,29 @@
+<div class="text-center" style="margin-top: 50px;">
+  <h1>ToDo List</h1>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4 col-md-offset-4" style="margin-top: 50px;">
+
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Tarefa" [(ngModel)]="newTodo.task">
+      <span class="input-group-btn">
+        <button class="btn btn-default" (click)="createToDo(newTodo)">Adicionar</button>
+      </span>
+    </div>
+    
+    <ul class="list-group" style="margin-top: 50px;">
+      <li class="list-group-item" *ngFor="let toDo of toDoList | async; let i = index">
+        <div>
+          <input [(ngModel)]="toDo.done" type="checkbox" id="task-{{toDo.id}}" name="status" [checked]="toDo.done" (change)="updateToDo(toDo)" style="display:inline">
+          <b [hidden]="inputShow && i==index && hideOnBlur" matTooltip="Dê duplo clique para alterar." matTooltipPosition="right" (dblclick)="editRecord(toDo.task, i);hideOnBlur=true">{{toDo.task}}</b>
+          <input id="index{{i}}" [hidden]="!(inputShow && i==index && hideOnBlur)" (blur)="updateToDo(toDo);hideOnBlur=false" [(ngModel)]="toDo.task">
+          <button style="float:right" (click)="deleteToDo(toDo.id)">Excluir</button>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
