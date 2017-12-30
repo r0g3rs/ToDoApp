@@ -36,7 +36,6 @@ export class AppService {
   };
 
   CreateToDo(newTodo: ToDoItem) {
-    debugger;
     var headers = new Headers();
     headers.append('Content-Type', 'application/json; charset=utf-8');
 

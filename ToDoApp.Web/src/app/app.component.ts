@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
   }
 
   public editRecord(item: ToDoItem, indx) {
-    debugger;
     this.hideOnBlur = true;
     this.inputShow = true;
     this.item = item;
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit {
   };
 
   public createToDo(item: ToDoItem) {
-    debugger;
     this._appService.CreateToDo(item);
   }
 

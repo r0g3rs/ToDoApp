@@ -28,7 +28,7 @@ namespace ToDoApp.Web.Controllers
     }
 
     [Route("~/api/Create")]
-    [HttpPost]
+    [HttpPost("{item}")]
     public IActionResult Create([FromBody] ToDoItem item)
     {
       if (item == null)
@@ -37,12 +37,12 @@ namespace ToDoApp.Web.Controllers
       }
 
       new BLToDo().CreateToDo(item);
-
-      return CreatedAtRoute("GetTodo", new { id = item.ID }, item);
+      
+      return new ObjectResult(item);
     }
 
     [Route("~/api/Update")]
-    [HttpPut("{id}")]
+    [HttpPut("{item}")]
     public IActionResult Update([FromBody] ToDoItem item)
     {      
       var todo = new BLToDo().GetToDo(item.ID);

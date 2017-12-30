@@ -79,7 +79,6 @@ var AppComponent = (function () {
         this.hideOnBlur = true;
     };
     AppComponent.prototype.editRecord = function (item, indx) {
-        debugger;
         this.hideOnBlur = true;
         this.inputShow = true;
         this.item = item;
@@ -87,7 +86,6 @@ var AppComponent = (function () {
     };
     ;
     AppComponent.prototype.createToDo = function (item) {
-        debugger;
         this._appService.CreateToDo(item);
     };
     AppComponent.prototype.updateToDo = function (item) {
@@ -212,7 +210,6 @@ var AppService = (function () {
     ;
     AppService.prototype.CreateToDo = function (newTodo) {
         var _this = this;
-        debugger;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json; charset=utf-8');
         this._http.post(this.baseUrl + "Create/", JSON.stringify(newTodo), { headers: headers })
