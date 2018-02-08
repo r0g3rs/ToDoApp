@@ -2,6 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ToDoApp.Data;
+using ToDoApp.Data.Interfaces;
+using ToDoApp.Data.Repositories;
+using ToDoApp.Service.Interfaces;
+using ToDoApp.Service.Services;
 
 namespace ToDoApp.Web
 {
@@ -18,6 +23,9 @@ namespace ToDoApp.Web
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc();
+      //services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+      services.AddScoped(typeof(IToDoRepository), typeof(ToDoRepository));
+      services.AddTransient<IToDoService, ToDoService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

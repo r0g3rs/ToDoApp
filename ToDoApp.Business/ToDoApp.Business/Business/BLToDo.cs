@@ -7,7 +7,7 @@ namespace ToDoApp.Business
 {
     public class BLToDo
     {
-        Repository<ToDoItem> _repository = Repository<ToDoItem>.Instance;
+        RepositoryBase<ToDoItem> _repository = RepositoryBase<ToDoItem>.Instance;
         public IList<ToDoItem> GetAllToDoItems()
         {  
             return _repository.GetAll().ToList();

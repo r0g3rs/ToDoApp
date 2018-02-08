@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using ToDoApp.Business;
 using ToDoApp.Model;
+using ToDoApp.Service.Interfaces;
 
 namespace ToDoApp.Web.Controllers
 {
@@ -9,17 +9,24 @@ namespace ToDoApp.Web.Controllers
   [Route("api/ToDoList")]
   public class ToDoListController : Controller
   {
+    private readonly IToDoService _toDoService;
+
+    public ToDoListController(IToDoService toDoService)
+    {
+      _toDoService = toDoService;
+    }
+
     [HttpGet]
     public IEnumerable<ToDoItem> GetAll()
     {
-      return new BLToDo().GetAllToDoItems();
+      return _toDoService.GetAllToDoItems();
     }
 
     [Route("~/api/GetById")]
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-      var item = new BLToDo().GetToDo(id);
+      var item = _toDoService.GetToDo(id);
       if (item == null)
       {
         return NotFound();
@@ -36,16 +43,16 @@ namespace ToDoApp.Web.Controllers
         return BadRequest();
       }
 
-      new BLToDo().CreateToDo(item);
-      
+      _toDoService.CreateToDo(item);
+
       return new ObjectResult(item);
     }
 
     [Route("~/api/Update")]
     [HttpPut("{item}")]
     public IActionResult Update([FromBody] ToDoItem item)
-    {      
-      var todo = new BLToDo().GetToDo(item.ID);
+    {
+      var todo = _toDoService.GetToDo(item.ID);
       if (todo == null)
       {
         return NotFound();
@@ -54,7 +61,7 @@ namespace ToDoApp.Web.Controllers
       todo.Done = item.Done;
       todo.Task = item.Task;
 
-      new BLToDo().UpdateToDo(todo);
+      _toDoService.UpdateToDo(todo);
       return new ObjectResult(todo);
     }
 
@@ -62,13 +69,13 @@ namespace ToDoApp.Web.Controllers
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-      var todo = new BLToDo().GetToDo(id);
+      var todo = _toDoService.GetToDo(id);
       if (todo == null)
       {
         return NotFound();
       }
 
-      new BLToDo().DeleteToDo(todo.ID);
+      _toDoService.DeleteToDo(todo.ID);
       return new NoContentResult();
     }
   }

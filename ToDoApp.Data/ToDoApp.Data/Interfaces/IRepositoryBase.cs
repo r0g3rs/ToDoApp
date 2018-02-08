@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using ToDoApp.Model.Interface;
 
-namespace ToDoApp.Data.Interface
+namespace ToDoApp.Data.Interfaces
 {
-    public interface IRepository<T> where T : IEntity
+    public interface IRepositoryBase<T> where T : IEntity
     {
         void Create(T entity);
         void Delete(int id);

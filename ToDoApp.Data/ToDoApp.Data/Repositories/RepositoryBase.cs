@@ -5,25 +5,25 @@ using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Linq;
-using ToDoApp.Data.Interface;
+using ToDoApp.Data.Interfaces;
 using ToDoApp.Model.Interface;
 
 namespace ToDoApp.Data
 {
-    public sealed class Repository<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : IEntity
     {
         private static Configuration configuration;
         ISessionFactory _sessionFactory;
         ISession _session;
 
-        private static readonly Repository<TEntity> _instance = new Repository<TEntity>();
+        private static readonly RepositoryBase<TEntity> _instance = new RepositoryBase<TEntity>();
 
-        private Repository()
+        public RepositoryBase()
         {
             InitializeSession();
         }
 
-        public static Repository<TEntity> Instance
+        public static RepositoryBase<TEntity> Instance
         {
             get
             {
