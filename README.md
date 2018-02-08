@@ -1,2 +1,2 @@
 # ToDoApp
-ToDo List utilizando Angular, Web API, Repository, Unit Test.
+ToDo List utilizando Angular, Web API, NHibernate, Repository, Unit Test, Injeção de Dependência.
